@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import BookingForm from "./components/Booking/BookingForm";
+import BookingList from "./components/Booking/BookingList";
+import DriverDashboard from "./pages/DriverDashboard";
 
-function App() {
+const App = () => {
+  const token = localStorage.getItem("token");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/booking-form" element={<BookingForm token={token} />} />
+        <Route path="/booking-list" element={<BookingList token={token} />} />
+        <Route path="/driver-dashboard" element={<DriverDashboard />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
